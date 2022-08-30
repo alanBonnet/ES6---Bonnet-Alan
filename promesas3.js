@@ -53,6 +53,22 @@ const obtenerPcias = async (provincia = "") => {
 
 //     const consulta = fetch('');
 // }
+
+const obtenerDptos = async (departamento = "") => {
+    try {
+        (departamento.trim())
+        ? departamento = `?provincia=${departamento}` 
+        : departamento = ``;
+        await retrasar(1391);
+        const consulta = await fetch(`https://apis.datos.gob.ar/georef/api/departamentos${departamento}`)
+            .then(res => res.json())
+            .then(respuestaObject => respuestaObject.departamentos )
+        console.log(consulta)
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 //----------------------------------------------------------------------------
 // Función que retorna los datos de localidades
 // function obtenerLocalidades() {
