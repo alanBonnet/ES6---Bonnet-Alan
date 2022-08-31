@@ -39,9 +39,9 @@ const obtenerPcias = async (provincia = "") => {
         const consulta = await fetch(`https://apis.datos.gob.ar/georef/api/provincias${provincia}aplanar=true&campos=completo&max=24`)
             .then(res => res.json())
             .then(respuestaObject => respuestaObject.provincias)
-        console.log(consulta)
+        return consulta
     } catch (error) {
-        console.log(error)
+        return error
     }
     
 }
@@ -63,9 +63,9 @@ const obtenerDptos = async (departamento = "") => {
         const consulta = await fetch(`https://apis.datos.gob.ar/georef/api/departamentos${departamento}aplanar=true&campos=completo&max=529`)
             .then(res => res.json())
             .then(respuestaObject => respuestaObject.departamentos )
-        console.log(consulta)
+        return consulta
     } catch (error) {
-        console.log(error)
+        return error
     }
 }
 
@@ -85,9 +85,9 @@ const obtenerLocalidades = async (localidad = "")=>{
         const consulta = await fetch(`https://apis.datos.gob.ar/georef/api/localidades${localidad}aplanar=true&max=4142`)
             .then(res => res.json())
             .then(respuestaObject => respuestaObject.localidades);
-        console.log(consulta)
+        return consulta
     } catch (error) {
-        console.log(error)
+        return error;
     }
 }
 
@@ -105,15 +105,16 @@ const obtenerLocalidades = async (localidad = "")=>{
 // }
 
 // consultarDatos();
-    (consultarDatos =  () => {
-        const provincias =  obtenerPcias();
-        const dptos =  obtenerDptos();
-        const localidades =  obtenerLocalidades();
+    (consultarDatos =  async () => {
+        const provincias = await obtenerPcias();
+        const dptos = await  obtenerDptos();
+        const localidades = await  obtenerLocalidades();
 
-         console.log(provincias);
-         console.log(dptos);
-         console.log(localidades);
+            console.log(provincias);
+            console.log(dptos);
+            console.log(localidades);
+         
 
     })()
-    
+        
 //----------------------------------------------------------------------------
